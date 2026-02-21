@@ -178,3 +178,25 @@ footer{
   font-size:14px;
   border-top:1px solid #2A2A3A;
 }
+#options button{
+  width:80%;
+  padding:12px;
+  margin:8px auto;
+  border:none;
+  border-radius:10px;
+  background:#6C2BD9;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  display:block;
+}
+
+#options button:hover{
+  background:#9333EA;
+  box-shadow:0 0 15px #9333EA;
+}
+
+#timer{
+  color:#FBBF24;
+  font-weight:bold;
+}
