@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhi Se Pucho 💊</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<title>Abhi Pucho 💊</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -17,36 +13,32 @@
   <p class="tagline">Pharmacy ka har sawaal, seedha Abhi se poochho 😎</p>
 </header>
 
-<!-- QUIZ BANNER -->
 <div class="quiz-banner">
   <a href="quiz.html" class="quiz-banner-content">
-    🧠 Daily Pharma Challenge 🚀  
+    🧠 Daily Pharma Challenge 🚀
     <span>Tap karo aur apna level check karo 😎💊</span>
   </a>
 </div>
 
-<!-- SUBJECT SECTION -->
 <section class="subjects">
 
-  <!-- MAIN 3 SUBJECTS -->
   <div class="cards">
 
     <a href="pharmacognosy.html" class="card">
-      🌿 Pharmacognosy <br>
+      🌿 Pharmacognosy
       <small>Jungle ki pharmacy 😂</small>
     </a>
 
     <a href="pharmchem.html" class="card">
-      🧪 Pharm Chemistry <br>
+      🧪 Pharm Chemistry
       <small>Reaction ka heartbreak 💔</small>
     </a>
 
     <a href="pharmacology.html" class="card">
-      💉 Pharmacology <br>
+      💉 Pharmacology
       <small>Injection therapy 😆</small>
     </a>
 
-    <!-- MORE BUTTON -->
     <div class="card more-card" onclick="toggleSubjects()">
       ➕ More Subjects
     </div>
@@ -57,27 +49,27 @@
   <div id="moreSubjects" class="extra-subjects">
 
     <a href="pharmaceutics.html" class="card">
-      🏭 Pharmaceutics <br>
+      🏭 Pharmaceutics
       <small>Factory vibes 🏗</small>
     </a>
 
-    <a href="pharmatherapeutics.html" class="card">
-      🩺 Therapeutics <br>
+    <a href="therapeutics.html" class="card">
+      🩺 Therapeutics
       <small>Doctor mode ON 👨‍⚕️</small>
     </a>
 
     <a href="law.html" class="card">
-      ⚖ Pharmacy Law & Ethics <br>
+      ⚖ Pharmacy Law & Ethics
       <small>Rules & regulations 📜</small>
     </a>
 
     <a href="hap.html" class="card">
-      🧠 HAP <br>
+      🧠 HAP
       <small>Body ka full system 🔬</small>
     </a>
 
     <a href="biochem.html" class="card">
-      🧬 Biochemistry <br>
+      🧬 Biochemistry
       <small>Lab reports ka game 🧪</small>
     </a>
 
@@ -85,19 +77,15 @@
 
 </section>
 
-<!-- AI BOX -->
-<section class="ai-box">
-  <h2>🧙 Pharma Baba Mode</h2>
-  <input type="text" id="question" placeholder="Apna pharmacy sawaal likho...">
-  <button onclick="answer()">Pucho 👀</button>
-  <p id="reply"></p>
-</section>
-
 <footer>
   ⚠️ Educational purpose only. Not medical advice.
 </footer>
 
-<script src="script.js"></script>
+<script>
+function toggleSubjects(){
+  document.getElementById("moreSubjects").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>
