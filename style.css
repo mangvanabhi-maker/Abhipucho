@@ -40,13 +40,14 @@ header{
   padding:18px;
   border-radius:16px;
   background:linear-gradient(270deg,#6a00ff,#8e2de2,#6a00ff);
-  background-size:400% 400%;
-  animation:gradientMove 6s ease infinite;
+  background-size:600% 600%;
+  animation:gradientMove 8s linear infinite;
   text-decoration:none;
   color:white;
   font-weight:bold;
   box-shadow:0 0 25px rgba(138,43,226,0.6);
 }
+
 
 .quiz-banner-content span{
   display:block;
