@@ -1,23 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap');
 
-/* RESET */
 *{
-  margin:0;
-  padding:0;
   box-sizing:border-box;
 }
 
 body{
+  margin:0;
   font-family:'Inter',sans-serif;
   background:#000;
   color:#fff;
   text-align:center;
 }
 
-/* ================= HEADER ================= */
+a{
+  text-decoration:none;
+  color:white;
+}
 
+/* HEADER */
 header{
-  padding:40px 20px 30px;
+  padding:35px 20px;
   background:#0f0f17;
   border-bottom:2px solid #6c2bd9;
 }
@@ -25,6 +27,7 @@ header{
 .logo{
   font-family:'Poppins',sans-serif;
   font-size:34px;
+  margin:0;
   color:#6c2bd9;
 }
 
@@ -33,32 +36,27 @@ header{
   color:#a1a1aa;
 }
 
-/* ================= QUIZ BANNER ================= */
-
+/* QUIZ BANNER */
 .quiz-banner{
-  padding:25px 15px;
+  padding:20px;
 }
 
-.quiz-banner a{
+.quiz-banner-content{
   display:block;
-  max-width:500px;
-  margin:auto;
-  padding:18px;
+  padding:18px 20px;
   border-radius:15px;
-  text-decoration:none;
-  color:white;
-  font-weight:bold;
   background:linear-gradient(270deg,#6c2bd9,#8e2de2,#6c2bd9);
   background-size:400% 400%;
   animation:gradientMove 6s ease infinite, floatBanner 3s ease-in-out infinite;
   box-shadow:0 0 25px rgba(108,43,217,0.7);
+  font-weight:bold;
 }
 
-.quiz-banner span{
+.quiz-banner-content span{
   display:block;
+  margin-top:6px;
   font-size:14px;
   opacity:0.9;
-  margin-top:6px;
 }
 
 @keyframes gradientMove{
@@ -69,76 +67,65 @@ header{
 
 @keyframes floatBanner{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-5px)}
+  50%{transform:translateY(-6px)}
 }
 
-/* ================= SUBJECT GRID ================= */
-
+/* SUBJECT GRID */
 .subjects{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
-  padding:30px 20px;
-  max-width:900px;
-  margin:auto;
+  padding:25px;
 }
 
-/* DESKTOP */
 @media(min-width:768px){
   .subjects{
     grid-template-columns:repeat(3,1fr);
   }
 }
 
-/* ================= CARD ================= */
-
+/* CARD */
 .card{
   background:#121222;
-  border:1px solid #2a2a3a;
-  border-radius:14px;
   padding:22px;
-  text-decoration:none;
-  color:white;
-  transition:0.3s;
+  border-radius:14px;
+  border:1px solid #2a2a3a;
+  transition:0.3s ease;
 }
 
 .card small{
   display:block;
   margin-top:6px;
-  color:#cfcfe4;
+  opacity:0.8;
 }
 
 .card:hover{
   background:#6c2bd9;
+  box-shadow:0 0 22px #6c2bd9;
   transform:translateY(-6px);
-  box-shadow:0 0 20px #6c2bd9;
 }
 
-/* ================= MORE BUTTON ================= */
-
 .more-card{
-  background:#6c2bd9;
+  background:#252540;
   font-weight:bold;
   cursor:pointer;
 }
 
-.more-card:hover{
-  background:#7c3aed;
-}
-
-/* ================= HIDDEN SUBJECTS ================= */
-
+/* Hidden subjects */
 .extra-subjects{
-  display:none;
+  grid-column:1/-1;
+  display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
-  padding:0 20px 30px;
-  max-width:900px;
-  margin:auto;
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:all 0.5s ease;
 }
 
 .extra-subjects.show{
-  display:grid;
+  max-height:800px;
+  opacity:1;
 }
 
 @media(min-width:768px){
@@ -147,27 +134,22 @@ header{
   }
 }
 
-/* ================= AI BOX ================= */
-
+/* AI BOX */
 .ai-box{
   margin:30px 20px;
   padding:25px;
   background:#0f0f17;
   border-radius:16px;
   border:1px solid #2a2a3a;
-  max-width:600px;
-  margin-left:auto;
-  margin-right:auto;
 }
 
 .ai-box h2{
   font-family:'Poppins',sans-serif;
   color:#6c2bd9;
-  margin-bottom:15px;
 }
 
 .ai-box input{
-  width:90%;
+  width:85%;
   padding:12px;
   border-radius:8px;
   border:1px solid #2a2a3a;
@@ -177,7 +159,7 @@ header{
 
 .ai-box button{
   margin-top:15px;
-  padding:10px 25px;
+  padding:10px 22px;
   border:none;
   border-radius:8px;
   background:#6c2bd9;
@@ -188,14 +170,15 @@ header{
 
 .ai-box button:hover{
   background:#7c3aed;
+  box-shadow:0 0 15px #7c3aed;
 }
 
-/* ================= FOOTER ================= */
-
+/* FOOTER */
 footer{
   margin-top:40px;
   padding:20px;
-  font-size:14px;
+  background:#0f0f17;
   color:#a1a1aa;
+  font-size:14px;
   border-top:1px solid #2a2a3a;
 }
