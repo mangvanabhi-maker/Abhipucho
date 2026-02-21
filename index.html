@@ -70,18 +70,29 @@
 <!-- AI BOX -->
 <div class="ai-box">
   <h2>🧙 Pharma Baba Mode</h2>
-  <input type="text" placeholder="Apna pharmacy sawaal likho...">
+
+  <input 
+    type="text" 
+    id="question"
+    placeholder="Apna pharmacy sawaal likho..."
+  >
+
   <br>
-  <button>Pucho 👀</button>
+
+  <button onclick="answer()">Pucho 👀</button>
+
+  <div id="reply" style="margin-top:20px;"></div>
+
   <p style="margin-top:15px; font-size:14px; opacity:0.7;">
     ⚠ Educational purpose only. Not medical advice.
   </p>
 </div>
 
+
 <footer>
   © 2026 AbhiPucho | Made with 💜
 </footer>
-
+<script src="script.js"></script>
 <script>
 function toggleSubjects(){
   document.getElementById("extraSubjects").classList.toggle("show");
