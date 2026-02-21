@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhi Se Pucho 💊</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&family=Pacifico&display=swap" rel="stylesheet">
+<title>Abhi btata hu 💊</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,87 +13,80 @@
   <h1 class="logo">Abhi btata hu 💊</h1>
   <p class="tagline">Pharmacy ka har sawaal, seedha Abhi se poochho 😎</p>
 </header>
+
+<!-- QUIZ BANNER -->
 <div class="quiz-banner">
-  <a href="quiz.html" class="quiz-banner-content">
-    🧠 Daily Pharma Challenge 🚀  
+  <a href="#" class="quiz-banner-content">
+    🧠 Daily Pharma Challenge 🚀
     <span>Tap karo aur apna level check karo 😎💊</span>
   </a>
 </div>
+
+<!-- SUBJECTS -->
 <section class="subjects">
 
-  <div class="cards">
+  <a href="pharmacognosy.html" class="card">
+    🌿 Pharmacognosy
+    <small>Jungle ki pharmacy 😂</small>
+  </a>
 
-    <!-- ONLY 3 VISIBLE -->
-    <a href="pharmacognosy.html" class="card">
-      🌿 Pharmacognosy <br>
-      <small>Jungle ki pharmacy 😂</small>
-    </a>
+  <a href="pharmchem.html" class="card">
+    🧪 Pharm Chemistry
+    <small>Reaction ka heartbreak 💔</small>
+  </a>
 
-    <a href="pharmchem.html" class="card">
-      🧪 Pharm Chemistry <br>
-      <small>Reaction ka heartbreak 💔</small>
-    </a>
+  <a href="pharmacology.html" class="card">
+    💉 Pharmacology
+    <small>Injection therapy 😆</small>
+  </a>
 
-    <a href="pharmacology.html" class="card">
-      💉 Pharmacology <br>
-      <small>Injection therapy 😆</small>
-    </a>
-
-    <!-- MORE BUTTON -->
-    <div class="card more-card" onclick="toggleSubjects()">
-      ➕ More Subjects
-    </div>
-
+  <!-- More Button -->
+  <div class="card more-card" onclick="toggleSubjects()">
+    ➕ More Subjects
   </div>
 
-  <!-- HIDDEN SUBJECTS -->
-  <div id="moreSubjects" class="extra-subjects">
+  <!-- Hidden Subjects -->
+  <div class="extra-subjects" id="extraSubjects">
 
     <a href="pharmaceutics.html" class="card">
-      🏭 Pharmaceutics <br>
+      🏭 Pharmaceutics
       <small>Factory vibes 🏗</small>
     </a>
 
-    <a href="Pharmatherapeutics.html" class="card">
-      🩺 Therapeutics <br>
-      <small>Doctor mode ON 👨‍⚕️</small>
+    <a href="therapeutics.html" class="card">
+      🩺 Therapeutics
+      <small>Doctor mode ON 👨‍⚕</small>
     </a>
 
     <a href="law.html" class="card">
-      ⚖ Pharmacy Law & Ethics <br>
+      ⚖ Pharmacy Law & Ethics
       <small>Rules & regulations 📜</small>
-    </a>
-
-    <a href="hap.html" class="card">
-      🧠 HAP <br>
-      <small>Body ka full system 🔬</small>
-    </a>
-
-    <a href="biochem.html" class="card">
-      🧬 Biochemistry <br>
-      <small>Lab reports ka game 🧪</small>
     </a>
 
   </div>
 
 </section>
 
-<section class="ai-box">
+<!-- AI BOX -->
+<div class="ai-box">
   <h2>🧙 Pharma Baba Mode</h2>
-  <input type="text" id="question" placeholder="Apna pharmacy sawaal likho...">
-  <button onclick="answer()">Pucho 👀</button>
-  <p id="reply"></p>
-</section>
+  <input type="text" placeholder="Apna pharmacy sawaal likho...">
+  <br>
+  <button>Pucho 👀</button>
+  <p style="margin-top:15px; font-size:14px; opacity:0.7;">
+    ⚠ Educational purpose only. Not medical advice.
+  </p>
+</div>
 
 <footer>
-  ⚠️ Educational purpose only. Not medical advice.
+  © 2026 AbhiPucho | Made with 💜
 </footer>
 
-<script src="script.js"></script>
-</body>
-</html>
-    <script  src="./script.js"></script>
+<script>
+function toggleSubjects(){
+  document.getElementById("extraSubjects").classList.toggle("show");
+}
+</script>
 
-  </body>
-  
+</body>
 </html>
