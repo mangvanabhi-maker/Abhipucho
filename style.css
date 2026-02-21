@@ -1,175 +1,201 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap');
 
-body{
+/* RESET */
+*{
   margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
   font-family:'Inter',sans-serif;
   background:#000;
   color:#fff;
   text-align:center;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 header{
-  padding:40px 20px;
-  background:#0F0F17;
-  border-bottom:2px solid #6C2BD9;
+  padding:40px 20px 30px;
+  background:#0f0f17;
+  border-bottom:2px solid #6c2bd9;
 }
 
 .logo{
   font-family:'Poppins',sans-serif;
   font-size:34px;
-  margin:0;
-  color:#6C2BD9;
-  letter-spacing:1px;
+  color:#6c2bd9;
 }
 
 .tagline{
   margin-top:8px;
-  color:#A1A1AA;
+  color:#a1a1aa;
 }
 
-/* SUBJECT GRID */
+/* ================= QUIZ BANNER ================= */
+
+.quiz-banner{
+  padding:25px 15px;
+}
+
+.quiz-banner a{
+  display:block;
+  max-width:500px;
+  margin:auto;
+  padding:18px;
+  border-radius:15px;
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+  background:linear-gradient(270deg,#6c2bd9,#8e2de2,#6c2bd9);
+  background-size:400% 400%;
+  animation:gradientMove 6s ease infinite, floatBanner 3s ease-in-out infinite;
+  box-shadow:0 0 25px rgba(108,43,217,0.7);
+}
+
+.quiz-banner span{
+  display:block;
+  font-size:14px;
+  opacity:0.9;
+  margin-top:6px;
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+@keyframes floatBanner{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+
+/* ================= SUBJECT GRID ================= */
+
 .subjects{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  grid-template-columns:repeat(2,1fr);
   gap:20px;
-  padding:30px;
+  padding:30px 20px;
+  max-width:900px;
+  margin:auto;
 }
 
-/* CARD */
+/* DESKTOP */
+@media(min-width:768px){
+  .subjects{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* ================= CARD ================= */
+
 .card{
-  display:block;
   background:#121222;
+  border:1px solid #2a2a3a;
+  border-radius:14px;
   padding:22px;
-  border-radius:12px;
-  border:1px solid #2A2A3A;
-  color:white;
   text-decoration:none;
-  transition:0.3s ease;
+  color:white;
+  transition:0.3s;
+}
+
+.card small{
+  display:block;
+  margin-top:6px;
+  color:#cfcfe4;
 }
 
 .card:hover{
-  background:#6C2BD9;
+  background:#6c2bd9;
   transform:translateY(-6px);
-  box-shadow:0 0 20px #6C2BD9;
+  box-shadow:0 0 20px #6c2bd9;
 }
 
-/* MORE CARD */
+/* ================= MORE BUTTON ================= */
+
 .more-card{
-  background:#252540;
+  background:#6c2bd9;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* EXTRA SUBJECTS */
+.more-card:hover{
+  background:#7c3aed;
+}
+
+/* ================= HIDDEN SUBJECTS ================= */
+
 .extra-subjects{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  display:none;
+  grid-template-columns:repeat(2,1fr);
   gap:20px;
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transform:translateY(-10px);
-  transition:all 0.5s ease;
+  padding:0 20px 30px;
+  max-width:900px;
+  margin:auto;
 }
 
 .extra-subjects.show{
-  max-height:500px;
-  opacity:1;
-  transform:translateY(0);
+  display:grid;
 }
 
-/* QUIZ ANIMATED BANNER */
-.quiz-banner{
-  margin:20px auto 30px;
-  padding:0 15px;
+@media(min-width:768px){
+  .extra-subjects{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 
-.quiz-banner-content{
-  display:block;
-  padding:18px 20px;
-  background:linear-gradient(270deg,#6a00ff,#8e2de2,#6a00ff);
-  background-size:400% 400%;
-  color:white;
-  text-decoration:none;
-  border-radius:15px;
-  font-weight:bold;
-  animation:gradientMove 6s ease infinite, floatBanner 3s ease-in-out infinite;
-  box-shadow:0 0 25px rgba(138,43,226,0.6);
-  transition:0.3s;
-}
+/* ================= AI BOX ================= */
 
-.quiz-banner-content span{
-  display:block;
-  font-size:14px;
-  margin-top:5px;
-  opacity:0.9;
-}
-
-.quiz-banner-content:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 35px rgba(138,43,226,1);
-}
-
-@keyframes gradientMove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-@keyframes floatBanner{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-5px);}
-  100%{transform:translateY(0);}
-}
-
-/* AI BOX */
 .ai-box{
   margin:30px 20px;
   padding:25px;
-  background:#0F0F17;
-  border-radius:15px;
-  border:1px solid #2A2A3A;
+  background:#0f0f17;
+  border-radius:16px;
+  border:1px solid #2a2a3a;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .ai-box h2{
   font-family:'Poppins',sans-serif;
-  color:#6C2BD9;
+  color:#6c2bd9;
+  margin-bottom:15px;
 }
 
-input{
-  width:80%;
+.ai-box input{
+  width:90%;
   padding:12px;
   border-radius:8px;
-  border:1px solid #2A2A3A;
-  margin-top:10px;
+  border:1px solid #2a2a3a;
   background:#121222;
   color:white;
 }
 
-button{
+.ai-box button{
   margin-top:15px;
-  padding:10px 20px;
+  padding:10px 25px;
   border:none;
   border-radius:8px;
-  background:#6C2BD9;
+  background:#6c2bd9;
   color:white;
   font-weight:bold;
   cursor:pointer;
-  transition:0.3s;
 }
 
-button:hover{
-  background:#7C3AED;
-  box-shadow:0 0 15px #7C3AED;
+.ai-box button:hover{
+  background:#7c3aed;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
+
 footer{
   margin-top:40px;
   padding:20px;
-  background:#0F0F17;
-  color:#A1A1AA;
   font-size:14px;
-  border-top:1px solid #2A2A3A;
+  color:#a1a1aa;
+  border-top:1px solid #2a2a3a;
 }
