@@ -2,37 +2,41 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Pharma Challenge 🧠</title>
+<title>Pharma Arena 👑</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="game-body">
 
-<header>
-  <h1 class="logo">🧠 Daily Pharma Challenge</h1>
-  <p class="tagline">Aaj ka level test karte hain 😎</p>
-</header>
+<div class="game-container">
 
-<section class="ai-box">
+  <div class="game-topbar">
+    <div id="playerName">Player</div>
+    <div id="levelDisplay">Level 1</div>
+    <div id="livesDisplay">❤️❤️❤️</div>
+    <div id="timerDisplay">⏳ 10</div>
+  </div>
 
-  <h2 id="questionBox">Loading...</h2>
-  <p id="timer">⏳ Time: 10</p>
+  <!-- XP BAR -->
+  <div class="xp-bar">
+    <div id="xpFill"></div>
+  </div>
 
-  <div id="options"></div>
+  <div class="game-main">
+    <h1 id="questionText">Loading...</h1>
+    <div id="optionsContainer"></div>
+  </div>
 
-  <h3 id="feedback"></h3>
-  <h3 id="scoreBox"></h3>
+  <div class="game-bottom">
+    <div id="feedbackText"></div>
+    <button onclick="nextQuestion()" class="next-btn">Next ➡</button>
+  </div>
 
-  <button onclick="nextQuestion()">Next ➡</button>
-  <button onclick="restartQuiz()">Restart 🔄</button>
+</div>
 
-</section>
+<audio id="correctSound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-level-completed-2059.mp3"></audio>
+<audio id="wrongSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
 
-<footer>
-  © 2026 AbhiPucho | Stay Drug-Smart 💊
-</footer>
-
-<script src="Quiz.js"></script>
-
+<script src="quiz.js"></script>
 </body>
 </html>
