@@ -1,114 +1,193 @@
-const quizData = [
+/* ===========================
+   PHARMA ARENA 3.0
+=========================== */
+
+const questions = [
   {
-    question: "What drug does to the body is called?",
-    options: ["Pharmacodynamics", "Pharmacokinetics", "Toxicology", "Therapy"],
-    answer: "Pharmacodynamics"
+    question:"What drug does to body?",
+    options:["Pharmacodynamics","Pharmacokinetics","Toxicology","Therapy"],
+    answer:"Pharmacodynamics"
   },
   {
-    question: "ADME stands for?",
-    options: [
+    question:"ADME stands for?",
+    options:[
       "Absorption Distribution Metabolism Excretion",
       "Action Dose Mechanism Effect",
-      "Acid Drug Medical Entry",
+      "Acid Drug Entry",
       "None"
     ],
-    answer: "Absorption Distribution Metabolism Excretion"
+    answer:"Absorption Distribution Metabolism Excretion"
   },
   {
-    question: "Atropine blocks?",
-    options: ["Beta receptors", "Muscarinic receptors", "Dopamine receptors", "Opioid receptors"],
-    answer: "Muscarinic receptors"
+    question:"Atropine blocks?",
+    options:["Beta","Muscarinic","Dopamine","Opioid"],
+    answer:"Muscarinic"
   }
 ];
 
-let currentQuestion = 0;
-let score = 0;
+let current = 0;
+let xp = 0;
+let level = 1;
+let lives = 3;
+let streak = 0;
 let timer;
 let timeLeft = 10;
+let bossRound = false;
 
-function shuffleQuestions() {
-  quizData.sort(() => Math.random() - 0.5);
+/* ELEMENTS */
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const feedbackText = document.getElementById("feedbackText");
+const levelDisplay = document.getElementById("levelDisplay");
+const livesDisplay = document.getElementById("livesDisplay");
+const timerDisplay = document.getElementById("timerDisplay");
+const xpFill = document.getElementById("xpFill");
+
+/* TIMER */
+function startTimer(){
+  clearInterval(timer);
+  timeLeft = bossRound ? 5 : 10;
+  timerDisplay.innerText = "⏳ " + timeLeft;
+
+  timer = setInterval(()=>{
+    timeLeft--;
+    timerDisplay.innerText = "⏳ " + timeLeft;
+    if(timeLeft <= 0){
+      clearInterval(timer);
+      loseLife();
+    }
+  },1000);
 }
 
-function loadQuestion() {
-  clearInterval(timer);
-  timeLeft = 10;
-  document.getElementById("timer").innerText = "⏳ Time: " + timeLeft;
+/* LOAD QUESTION */
+function loadQuestion(){
+  bossRound = (current % 5 === 0 && current !== 0);
 
-  timer = setInterval(() => {
-    timeLeft--;
-    document.getElementById("timer").innerText = "⏳ Time: " + timeLeft;
-    if (timeLeft === 0) {
-      clearInterval(timer);
-      document.getElementById("feedback").innerText = "⏰ Time up! Pharmacology ne dhoka de diya 😭";
-    }
-  }, 1000);
+  const q = questions[current % questions.length];
 
-  const q = quizData[currentQuestion];
-  document.getElementById("questionBox").innerText = q.question;
+  if(bossRound){
+    questionText.innerText = "👹 BOSS: " + q.question;
+    questionText.classList.add("boss-mode");
+  }else{
+    questionText.innerText = q.question;
+    questionText.classList.remove("boss-mode");
+  }
 
-  const optionsBox = document.getElementById("options");
-  optionsBox.innerHTML = "";
-  document.getElementById("feedback").innerText = "";
+  optionsContainer.innerHTML = "";
+  feedbackText.innerText = "";
 
-  q.options.forEach(option => {
+  q.options.forEach(option=>{
     const btn = document.createElement("button");
     btn.innerText = option;
-    btn.onclick = () => checkAnswer(option);
-    optionsBox.appendChild(btn);
+    btn.onclick = ()=>checkAnswer(option);
+    optionsContainer.appendChild(btn);
   });
+
+  startTimer();
 }
 
-function checkAnswer(selected) {
+/* CHECK ANSWER */
+function checkAnswer(selected){
   clearInterval(timer);
 
-  if (selected === quizData[currentQuestion].answer) {
-    score++;
-    document.getElementById("feedback").innerText =
-      "🔥 Sahi jawaab! Lagta hai viva me bhi top karoge 😎";
-    confetti();
-  } else {
-    document.getElementById("feedback").innerText =
-      "❌ Galat! NCERT dobara kholo bhai 📚😂";
+  const correct = questions[current % questions.length].answer;
+
+  if(selected === correct){
+    streak++;
+    xp += bossRound ? 25 : 10;
+    if(streak >= 3) xp += 5;
+
+    feedbackText.innerText = "🔥 Correct!";
+    confettiBlast();
+  }else{
+    loseLife();
   }
+
+  updateStats();
 }
 
-function nextQuestion() {
-  currentQuestion++;
-  if (currentQuestion < quizData.length) {
-    loadQuestion();
-  } else {
-    document.getElementById("questionBox").innerText = "🎉 Quiz Finished!";
-    document.getElementById("options").innerHTML = "";
-    document.getElementById("scoreBox").innerText =
-      "Final Score: " + score + "/" + quizData.length;
+/* LOSE LIFE */
+function loseLife(){
+  lives--;
+  streak = 0;
+  feedbackText.innerText = "❌ Life Lost";
 
-    if (score === quizData.length) {
-      document.getElementById("feedback").innerText =
-        "👑 KING LEVEL! Pharma Baba khush hai 😎🔥";
-    } else if (score >= 2) {
-      document.getElementById("feedback").innerText =
-        "💊 Achha tha! Thoda aur padho champion.";
-    } else {
-      document.getElementById("feedback").innerText =
-        "😭 Bhai... Pharmacology tumse naraaz hai.";
-    }
+  if(lives <= 0){
+    questionText.innerText = "💀 GAME OVER!";
+    optionsContainer.innerHTML = "";
+    clearInterval(timer);
   }
+
+  updateStats();
 }
 
-function restartQuiz() {
-  currentQuestion = 0;
-  score = 0;
-  shuffleQuestions();
+/* UPDATE */
+function updateStats(){
+  if(xp >= 100){
+    level++;
+    xp = 0;
+  }
+
+  levelDisplay.innerText = "Level " + level;
+  livesDisplay.innerText = "❤️".repeat(lives);
+  xpFill.style.width = xp + "%";
+
+  localStorage.setItem("level",level);
+}
+
+/* NEXT */
+function nextQuestion(){
+  if(lives <= 0) return;
+  current++;
   loadQuestion();
 }
 
-function confetti() {
-  document.body.style.backgroundColor = "#111122";
-  setTimeout(() => {
-    document.body.style.backgroundColor = "#000";
-  }, 300);
+/* CONFETTI */
+function confettiBlast(){
+  const confetti = document.createElement("div");
+  confetti.innerText = "🎉🎉🎉";
+  confetti.style.position="fixed";
+  confetti.style.top="50%";
+  confetti.style.left="50%";
+  confetti.style.fontSize="40px";
+  confetti.style.transform="translate(-50%,-50%)";
+  document.body.appendChild(confetti);
+
+  setTimeout(()=>confetti.remove(),800);
 }
 
-shuffleQuestions();
+/* PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<60;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3,
+    speedY:Math.random()*1+0.2
+  });
+}
+
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(138,43,226,0.7)";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+    p.y += p.speedY;
+    if(p.y > canvas.height) p.y = 0;
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* INIT */
+updateStats();
 loadQuestion();
