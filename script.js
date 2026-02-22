@@ -124,5 +124,20 @@ function answer() {
 }
 function toggleSubjects() {
   const more = document.getElementById("moreSubjects");
+  
   more.classList.toggle("show");
 }
+document.addEventListener("DOMContentLoaded", function(){
+
+  const cards = document.querySelectorAll(".subject-card");
+
+  cards.forEach(card => {
+    card.addEventListener("click", function(){
+
+      const page = this.getAttribute("data-page");
+
+      if(page){
+        window.location.href = page;
+      } else {
+        alert("Page abhi ready nahi hai 👀");
+      }
