@@ -46,22 +46,69 @@ document.addEventListener("DOMContentLoaded", function () {
      PHARMA BABA MODE
   ========================== */
 
-  window.askBaba = function(){
+ window.askBaba = function(){
 
-    const input = document.getElementById("questionInput");
+  const input = document.getElementById("questionInput");
+  const replyBox = document.getElementById("babaReply");
 
-    if(!input) return;
+  if(!input || !replyBox) return;
 
-    const question = input.value.trim();
+  const question = input.value.trim();
 
-    if(question === ""){
-      alert("Pehle sawaal likho 😎");
-      return;
+  if(question === ""){
+    replyBox.innerHTML = "😎 Pehle sawaal likho King!";
+    return;
+  }
+
+  const lower = question.toLowerCase();
+
+  replyBox.innerHTML = "<span class='typing'>Pharma Baba soch raha hai 🤔...</span>";
+
+  setTimeout(() => {
+
+    let answer = "";
+
+    if(lower.includes("pharmacology")){
+      answer = "💉 Pharmacology is the branch of medical science that deals with drugs and their effects on living organisms.<br><br>It includes Pharmacodynamics (what drug does to body) and Pharmacokinetics (ADME).<br><br>It ensures safe and rational therapy.";
     }
 
-    alert("Pharma Baba soch raha hai 🤔...");
+    else if(lower.includes("insulin")){
+      answer = "🩸 Insulin is secreted by beta cells of pancreas.<br><br>It lowers blood glucose level and helps glucose enter cells.<br><br>Mainly used in Type 1 Diabetes.";
+    }
 
-  };
+    else if(lower.includes("aspirin")){
+      answer = "💊 Aspirin is an NSAID.<br><br>Used for pain, fever and inflammation.<br><br>Low dose prevents blood clot.";
+    }
+
+    else if(lower.includes("atropine")){
+      answer = "⚡ Atropine blocks muscarinic receptors.<br><br>Used in bradycardia and organophosphate poisoning.";
+    }
+
+    else{
+      answer = "🤔 Pharma Baba ko abhi iska gyaan nahi hai.<br>Clear keyword likho jaise insulin, aspirin, pharmacology.";
+    }
+
+    typeWriterEffect(answer, replyBox);
+
+  }, 800);
+
+};
+
+
+function typeWriterEffect(text, element){
+  element.innerHTML = "";
+  let i = 0;
+
+  function typing(){
+    if(i < text.length){
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 15);
+    }
+  }
+
+  typing();
+}
 
 });
 document.querySelectorAll('.main-card').forEach(card => {
