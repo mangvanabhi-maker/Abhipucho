@@ -1,81 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abhi Pucho</title>
 
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
-</head>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
 
+body{
+  background:linear-gradient(135deg,#2b1055,#000);
+  color:white;
+  min-height:100vh;
+}
+
+.title{
+  text-align:center;
+  margin:30px 0;
+  font-size:28px;
+}
+
+.challenge{
+  margin:20px;
+  padding:25px;
+  text-align:center;
+  border-radius:20px;
+  background:linear-gradient(45deg,#9333ea,#c084fc);
+  cursor:pointer;
+}
+
+.subjects-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 15px 30px rgba(147,51,234,0.4);
+}
+
+.card:active{
+  transform:scale(0.95);
+}
+
+.section{
+  margin:40px 20px;
+}
+
+.pyq-card{
+  margin:10px 0;
+  padding:15px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.05);
+  cursor:pointer;
+}
+
+.pyq-card:hover{
+  background:rgba(147,51,234,0.2);
+}
+
+.pharma-baba{
+  margin:40px 20px;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  background:linear-gradient(135deg,#1e1b4b,#3b0764);
+}
+
+.pharma-baba input{
+  width:90%;
+  padding:10px;
+  margin:15px 0;
+  border:none;
+  border-radius:10px;
+}
+
+.pharma-baba button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(45deg,#9333ea,#c084fc);
+  color:white;
+  cursor:pointer;
+}
+</style>
+
+</head>
 <body>
 
-<h1 class="main-title">Abhi btata hu 💊</h1>
+<h1 class="title">Abhi btata hu 💊</h1>
 
-<!-- Daily Challenge -->
-<div class="challenge-card">
+<div class="challenge" onclick="goTo('quiz.html')">
   🧠 Daily Pharma Challenge 🚀
   <p>Tap karo aur apna level check karo 😎</p>
 </div>
 
-<!-- SUBJECTS GRID -->
 <div class="subjects-grid">
 
-  <div class="subject-card" onclick="openPage('pharmacognosy.html')">
-    🌿 <h3>Pharmacognosy</h3>
-    <p>Jungle ki pharmacy 😂</p>
+  <div class="card" onclick="goTo('pharmacognosy.html')">
+    🌿 Pharmacognosy
   </div>
 
-  <div class="subject-card" onclick="openPage('chemistry.html')">
-    🧪 <h3>Pharm Chemistry</h3>
-    <p>Reaction ka heartbreak 💔</p>
+  <div class="card" onclick="goTo('chemistry.html')">
+    🧪 Pharm Chemistry
   </div>
 
-  <div class="subject-card" onclick="openPage('pharmacology.html')">
-    💉 <h3>Pharmacology</h3>
-    <p>Injection therapy 😆</p>
+  <div class="card" onclick="goTo('pharmacology.html')">
+    💉 Pharmacology
   </div>
 
-  <div class="subject-card" onclick="openPage('pharmaceutics.html')">
-    🏭 <h3>Pharmaceutics</h3>
-    <p>Factory vibes 🏗</p>
+  <div class="card" onclick="goTo('pharmaceutics.html')">
+    🏭 Pharmaceutics
   </div>
 
-  <div class="subject-card">
-    🩺 <h3>Therapeutics</h3>
-    <p>Doctor mode ON 👨‍⚕️</p>
+  <div class="card" onclick="goTo('therapeutics.html')">
+    🩺 Therapeutics
   </div>
 
-  <div class="subject-card">
-    ⚖ <h3>Pharmacy Law & Ethics</h3>
-    <p>Rules & regulations 📜</p>
+  <div class="card" onclick="goTo('law.html')">
+    ⚖ Pharmacy Law & Ethics
   </div>
 
-  <div class="subject-card">
-    🧠 <h3>HAP</h3>
-    <p>Body ka full system 🔬</p>
+  <div class="card" onclick="goTo('hap.html')">
+    🧠 HAP
   </div>
 
 </div>
 
-<!-- PREVIOUS YEAR PAPERS -->
-<section class="pyq-section">
+<div class="section">
   <h2>📄 Previous Year Papers</h2>
 
-  <div class="pyq-grid">
-    <div class="pyq-card">AIIMS 2023</div>
-    <div class="pyq-card">SSC 2022</div>
-    <div class="pyq-card">Railway 2021</div>
-  </div>
-</section>
+  <div class="pyq-card" onclick="goTo('aiims.html')">AIIMS 2023</div>
+  <div class="pyq-card" onclick="goTo('ssc.html')">SSC 2022</div>
+  <div class="pyq-card" onclick="goTo('railway.html')">Railway 2021</div>
+</div>
 
-<!-- PHARMA BABA -->
-<section class="pharma-baba">
+<div class="pharma-baba">
   <h2>🧙 Pharma Baba Mode</h2>
-  <input type="text" placeholder="Apna pharmacy sawaal likho..." />
-  <button onclick="askQuestion()">Pucho 👀</button>
-</section>
+  <input type="text" id="questionInput" placeholder="Apna pharmacy sawaal likho..." />
+  <br>
+  <button onclick="askBaba()">Pucho 👀</button>
+</div>
+
+<script>
+function goTo(page){
+  window.location.href = page;
+}
+
+function askBaba(){
+  const question = document.getElementById("questionInput").value;
+
+  if(question.trim() === ""){
+    alert("Pehle sawaal likho 😎");
+  } else {
+    alert("Pharma Baba soch raha hai 🤔...");
+  }
+}
+</script>
 
 </body>
 </html>
