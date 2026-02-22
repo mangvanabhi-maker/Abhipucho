@@ -1,103 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhi Pucho 💊</title>
+<title>Abhi Pucho</title>
+
 <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 
 <body>
 
-<header>
-  <h1 class="logo">Abhi btata hu 💊</h1>
-  <p class="tagline">Pharmacy ka har sawaal, seedha Abhi se poochho 😎</p>
-</header>
+<h1 class="main-title">Abhi btata hu 💊</h1>
 
-<!-- QUIZ BANNER -->
-<div class="quiz-banner">
-  <a href="quiz.html" class="quiz-banner-content">
-    🧠 Daily Pharma Challenge 🚀
-    <span>Tap karo aur apna level check karo 😎💊</span>
-  </a>
+<!-- Daily Challenge -->
+<div class="challenge-card">
+  🧠 Daily Pharma Challenge 🚀
+  <p>Tap karo aur apna level check karo 😎</p>
 </div>
 
-<!-- SUBJECTS -->
-<section class="subjects">
+<!-- SUBJECTS GRID -->
+<div class="subjects-grid">
 
-  <div class="cards">
-
-    <a href="pharmacognosy.html" class="card">
-      🌿 Pharmacognosy
-      <small>Jungle ki pharmacy 😂</small>
-    </a>
-
-    <a href="pharmchem.html" class="card">
-      🧪 Pharm Chemistry
-      <small>Reaction ka heartbreak 💔</small>
-    </a>
-
-    <a href="pharmacology.html" class="card">
-      💉 Pharmacology
-      <small>Injection therapy 😆</small>
-    </a>
-
-    <div class="card more-card" onclick="toggleSubjects()">
-      ➕ More Subjects
-    </div>
-
+  <div class="subject-card" onclick="openPage('pharmacognosy.html')">
+    🌿 <h3>Pharmacognosy</h3>
+    <p>Jungle ki pharmacy 😂</p>
   </div>
 
-  <div id="moreSubjects" class="extra-subjects">
-
-    <a href="pharmaceutics.html" class="card">
-      🏭 Pharmaceutics
-      <small>Factory vibes 🏗</small>
-    </a>
-
-    <a href="therapeutics.html" class="card">
-      🩺 Therapeutics
-      <small>Doctor mode ON 👨‍⚕️</small>
-    </a>
-
-    <a href="law.html" class="card">
-      ⚖ Pharmacy Law & Ethics
-      <small>Rules & regulations 📜</small>
-    </a>
-
-    <a href="hap.html" class="card">
-      🧠 HAP
-      <small>Body ka full system 🔬</small>
-    </a>
-
-    <a href="biochem.html" class="card">
-      🧬 Biochemistry
-      <small>Lab reports ka game 🧪</small>
-    </a>
-
+  <div class="subject-card" onclick="openPage('chemistry.html')">
+    🧪 <h3>Pharm Chemistry</h3>
+    <p>Reaction ka heartbreak 💔</p>
   </div>
 
+  <div class="subject-card" onclick="openPage('pharmacology.html')">
+    💉 <h3>Pharmacology</h3>
+    <p>Injection therapy 😆</p>
+  </div>
+
+  <div class="subject-card" onclick="openPage('pharmaceutics.html')">
+    🏭 <h3>Pharmaceutics</h3>
+    <p>Factory vibes 🏗</p>
+  </div>
+
+  <div class="subject-card">
+    🩺 <h3>Therapeutics</h3>
+    <p>Doctor mode ON 👨‍⚕️</p>
+  </div>
+
+  <div class="subject-card">
+    ⚖ <h3>Pharmacy Law & Ethics</h3>
+    <p>Rules & regulations 📜</p>
+  </div>
+
+  <div class="subject-card">
+    🧠 <h3>HAP</h3>
+    <p>Body ka full system 🔬</p>
+  </div>
+
+</div>
+
+<!-- PREVIOUS YEAR PAPERS -->
+<section class="pyq-section">
+  <h2>📄 Previous Year Papers</h2>
+
+  <div class="pyq-grid">
+    <div class="pyq-card">AIIMS 2023</div>
+    <div class="pyq-card">SSC 2022</div>
+    <div class="pyq-card">Railway 2021</div>
+  </div>
 </section>
 
-<!-- AI BOX -->
-<section class="ai-box">
+<!-- PHARMA BABA -->
+<section class="pharma-baba">
   <h2>🧙 Pharma Baba Mode</h2>
-  <input type="text" id="question" placeholder="Apna pharmacy sawaal likho...">
-  <br>
-  <button onclick="answer()">Pucho 👀</button>
-  <p id="reply"></p>
+  <input type="text" placeholder="Apna pharmacy sawaal likho..." />
+  <button onclick="askQuestion()">Pucho 👀</button>
 </section>
-
-<footer>
-  ⚠️ Educational purpose only. Not medical advice.
-</footer>
-
-<script src="script.js"></script>
-
-<script>
-function toggleSubjects(){
-  document.getElementById("moreSubjects").classList.toggle("show");
-}
-</script>
 
 </body>
 </html>
