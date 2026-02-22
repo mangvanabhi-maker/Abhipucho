@@ -94,21 +94,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
 };
 
-
 function typeWriterEffect(text, element){
+
   element.innerHTML = "";
   let i = 0;
 
   function typing(){
-    if(i < text.length){
-      element.innerHTML += text.charAt(i);
+
+    if(i >= text.length) return;
+
+    // If HTML tag start detected
+    if(text[i] === "<"){
+
+      let tag = "";
+
+      while(text[i] !== ">" && i < text.length){
+        tag += text[i];
+        i++;
+      }
+
+      tag += ">";
       i++;
-      setTimeout(typing, 15);
+
+      element.innerHTML += tag;
+
+    } else {
+
+      element.innerHTML += text[i];
+      i++;
     }
+
+    setTimeout(typing, 15);
   }
 
   typing();
 }
+
 
 });
 document.querySelectorAll('.main-card').forEach(card => {
