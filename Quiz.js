@@ -1,193 +1,121 @@
-/* ===========================
-   PHARMA ARENA 3.0
-=========================== */
-
 const questions = [
   {
-    question:"What drug does to body?",
-    options:["Pharmacodynamics","Pharmacokinetics","Toxicology","Therapy"],
-    answer:"Pharmacodynamics"
+    question: "Which vitamin is fat soluble?",
+    options: ["Vitamin C", "Vitamin B12", "Vitamin A", "Vitamin B6"],
+    answer: 2
   },
   {
-    question:"ADME stands for?",
-    options:[
-      "Absorption Distribution Metabolism Excretion",
-      "Action Dose Mechanism Effect",
-      "Acid Drug Entry",
-      "None"
-    ],
-    answer:"Absorption Distribution Metabolism Excretion"
+    question: "Normal blood pH is?",
+    options: ["6.5", "7.4", "8.0", "5.5"],
+    answer: 1
   },
   {
-    question:"Atropine blocks?",
-    options:["Beta","Muscarinic","Dopamine","Opioid"],
-    answer:"Muscarinic"
+    question: "Insulin is secreted by?",
+    options: ["Liver", "Pancreas", "Kidney", "Heart"],
+    answer: 1
   }
 ];
 
-let current = 0;
-let xp = 0;
-let level = 1;
-let lives = 3;
-let streak = 0;
-let timer;
-let timeLeft = 10;
-let bossRound = false;
+let currentQuestion = 0;
+let score = 0;
+let hearts = 3;
+let timeLeft = 15;
+let timerInterval;
 
-/* ELEMENTS */
-const questionText = document.getElementById("questionText");
-const optionsContainer = document.getElementById("optionsContainer");
-const feedbackText = document.getElementById("feedbackText");
-const levelDisplay = document.getElementById("levelDisplay");
-const livesDisplay = document.getElementById("livesDisplay");
-const timerDisplay = document.getElementById("timerDisplay");
-const xpFill = document.getElementById("xpFill");
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const heartsEl = document.getElementById("hearts");
+const timeEl = document.getElementById("time");
+const nextBtn = document.getElementById("nextBtn");
+const scoreBox = document.getElementById("scoreBox");
 
-/* TIMER */
 function startTimer(){
-  clearInterval(timer);
-  timeLeft = bossRound ? 5 : 10;
-  timerDisplay.innerText = "⏳ " + timeLeft;
+  timeLeft = 15;
+  timeEl.textContent = timeLeft;
+  timeEl.classList.remove("red");
 
-  timer = setInterval(()=>{
+  timerInterval = setInterval(()=>{
     timeLeft--;
-    timerDisplay.innerText = "⏳ " + timeLeft;
-    if(timeLeft <= 0){
-      clearInterval(timer);
-      loseLife();
+    timeEl.textContent = timeLeft;
+
+    if(timeLeft <= 5){
+      timeEl.classList.add("red");
     }
+
+    if(timeLeft <= 0){
+      clearInterval(timerInterval);
+      loseHeart();
+      nextBtn.style.display = "block";
+    }
+
   },1000);
 }
 
-/* LOAD QUESTION */
-function loadQuestion(){
-  bossRound = (current % 5 === 0 && current !== 0);
+function showQuestion(){
+  nextBtn.style.display = "none";
+  optionsEl.innerHTML = "";
 
-  const q = questions[current % questions.length];
+  const q = questions[currentQuestion];
+  questionEl.textContent = q.question;
 
-  if(bossRound){
-    questionText.innerText = "👹 BOSS: " + q.question;
-    questionText.classList.add("boss-mode");
-  }else{
-    questionText.innerText = q.question;
-    questionText.classList.remove("boss-mode");
-  }
-
-  optionsContainer.innerHTML = "";
-  feedbackText.innerText = "";
-
-  q.options.forEach(option=>{
-    const btn = document.createElement("button");
-    btn.innerText = option;
-    btn.onclick = ()=>checkAnswer(option);
-    optionsContainer.appendChild(btn);
+  q.options.forEach((option,index)=>{
+    const button = document.createElement("button");
+    button.textContent = option;
+    button.onclick = ()=> checkAnswer(index,button);
+    optionsEl.appendChild(button);
   });
 
   startTimer();
 }
 
-/* CHECK ANSWER */
-function checkAnswer(selected){
-  clearInterval(timer);
+function checkAnswer(index,button){
+  clearInterval(timerInterval);
 
-  const correct = questions[current % questions.length].answer;
+  const correctIndex = questions[currentQuestion].answer;
+  const buttons = document.querySelectorAll(".options button");
 
-  if(selected === correct){
-    streak++;
-    xp += bossRound ? 25 : 10;
-    if(streak >= 3) xp += 5;
+  buttons.forEach(btn => btn.disabled = true);
 
-    feedbackText.innerText = "🔥 Correct!";
-    confettiBlast();
+  if(index === correctIndex){
+    button.classList.add("correct");
+    score++;
   }else{
-    loseLife();
+    button.classList.add("wrong");
+    buttons[correctIndex].classList.add("correct");
+    loseHeart();
   }
 
-  updateStats();
+  nextBtn.style.display = "block";
 }
 
-/* LOSE LIFE */
-function loseLife(){
-  lives--;
-  streak = 0;
-  feedbackText.innerText = "❌ Life Lost";
+function loseHeart(){
+  hearts--;
+  heartsEl.textContent = "❤️ ".repeat(hearts);
+  heartsEl.classList.add("blink");
 
-  if(lives <= 0){
-    questionText.innerText = "💀 GAME OVER!";
-    optionsContainer.innerHTML = "";
-    clearInterval(timer);
+  setTimeout(()=> heartsEl.classList.remove("blink"),300);
+
+  if(hearts <= 0){
+    endGame();
   }
-
-  updateStats();
 }
 
-/* UPDATE */
-function updateStats(){
-  if(xp >= 100){
-    level++;
-    xp = 0;
+nextBtn.onclick = ()=>{
+  currentQuestion++;
+
+  if(currentQuestion < questions.length){
+    showQuestion();
+  }else{
+    endGame();
   }
+};
 
-  levelDisplay.innerText = "Level " + level;
-  livesDisplay.innerText = "❤️".repeat(lives);
-  xpFill.style.width = xp + "%";
-
-  localStorage.setItem("level",level);
+function endGame(){
+  clearInterval(timerInterval);
+  questionEl.textContent = "Game Over!";
+  optionsEl.innerHTML = "";
+  nextBtn.style.display = "none";
+  scoreBox.textContent = "Your Score: " + score;
 }
 
-/* NEXT */
-function nextQuestion(){
-  if(lives <= 0) return;
-  current++;
-  loadQuestion();
-}
-
-/* CONFETTI */
-function confettiBlast(){
-  const confetti = document.createElement("div");
-  confetti.innerText = "🎉🎉🎉";
-  confetti.style.position="fixed";
-  confetti.style.top="50%";
-  confetti.style.left="50%";
-  confetti.style.fontSize="40px";
-  confetti.style.transform="translate(-50%,-50%)";
-  document.body.appendChild(confetti);
-
-  setTimeout(()=>confetti.remove(),800);
-}
-
-/* PARTICLES */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*3,
-    speedY:Math.random()*1+0.2
-  });
-}
-
-function animateParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="rgba(138,43,226,0.7)";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fill();
-    p.y += p.speedY;
-    if(p.y > canvas.height) p.y = 0;
-  });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-
-/* INIT */
-updateStats();
-loadQuestion();
+showQuestion();
